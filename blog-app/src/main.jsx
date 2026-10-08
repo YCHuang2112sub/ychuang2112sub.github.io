@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { useCreateBlockNote } from '@blocknote/react';
 import { BlockNoteView } from '@blocknote/mantine';
@@ -29,7 +29,6 @@ function App() {
  const [topicRecords,setTopicRecords]=useState([]);
  const [topic,setTopic]=useState('All'),[status,setStatus]=useState(''),[dirty,setDirty]=useState(false),[busy,setBusy]=useState(false);
  const [ownerSession,setOwnerSession]=useState(null);
- const revision=useRef(0), saving=useRef(false);
  const owner=!!user && ownerSession===user.uid;
  useEffect(()=>{
    let active=true;
@@ -46,34 +45,11 @@ function App() {
  },[owner]);
  useEffect(()=>db ? onSnapshot(collection(db,'blogTopics'),s=>setTopicRecords(s.docs.map(d=>d.data().name)),e=>setStatus(e.message)) : undefined,[]);
  useEffect(()=>{ const warn=e=>{if(dirty){e.preventDefault();e.returnValue='';}};window.addEventListener('beforeunload',warn);return()=>window.removeEventListener('beforeunload',warn);},[dirty]);
- const update=fields=>{revision.current++;setCurrent(p=>({...p,...fields}));setDirty(true);};
+ const update=fields=>{setCurrent(p=>({...p,...fields}));setDirty(true);};
  const choose=p=>{if(dirty&&!confirm('Discard unsaved changes?'))return;setCurrent(p);setDirty(false);setStatus('');};
  const create=(name)=>{setTopic(name);choose({id:crypto.randomUUID(),title:'Untitled',topic:name,date:new Date().toLocaleDateString('en-CA'),blocks:empty,published:false});};
- async function save(published, automatic=false){
-  if(!owner||!current||saving.current)return;
-  if(!current.title.trim()||!current.topic.trim()||!/^\d{4}-\d{2}-\d{2}$/.test(current.date)){
-   if(!automatic)setStatus('Add a title, topic, and valid date.');
-   return;
-  }
-  const snapshot=current, savedRevision=revision.current;
-  saving.current=true;setBusy(true);
-  try{
-   const value={...snapshot,published,updatedAt:new Date().toISOString()};
-   delete value.id;
-   const batch=writeBatch(db);
-   batch.set(doc(db,'blogPosts',snapshot.id),value);
-   batch.set(doc(db,'blogTopics',encodeURIComponent(value.topic)),{name:value.topic});
-   await batch.commit();
-   setCurrent(p=>p?.id===snapshot.id?{...p,...(revision.current===savedRevision?{published}:{})}:p);
-   if(revision.current===savedRevision){setDirty(false);setStatus(automatic?'Autosaved.':published?'Published.':'Draft saved.');}
-  }catch(e){setStatus('Save failed: '+e.message);}
-  finally{saving.current=false;setBusy(false);}
- }
- useEffect(()=>{
-  if(!owner||!dirty||!current||busy)return;
-  const timer=setTimeout(()=>save(current.published,true),11000);
-  return()=>clearTimeout(timer);
- },[owner,dirty,current,busy]);
+ async function save(published){if(!owner||!current)return;if(!current.title.trim()||!current.topic.trim()||!/^\d{4}-\d{2}-\d{2}$/.test(current.date)){setStatus('Add a title, topic, and valid date.');return;}
+ setBusy(true);try{const value={...current,published,updatedAt:new Date().toISOString()};delete value.id;const batch=writeBatch(db);batch.set(doc(db,'blogPosts',current.id),value);batch.set(doc(db,'blogTopics',encodeURIComponent(value.topic)),{name:value.topic});await batch.commit();setCurrent(p=>({...p,published}));setDirty(false);setStatus(published?'Published.':'Draft saved.');}catch(e){setStatus(e.message);}finally{setBusy(false);}}
  async function remove(){if(!owner||!current||!confirm('Delete this page permanently?'))return;setBusy(true);try{await deleteDoc(doc(db,'blogPosts',current.id));setCurrent(null);setDirty(false);}catch(e){setStatus(e.message);}finally{setBusy(false);}}
  const topics=[...new Set([...topicRecords,...posts.map(p=>p.topic)].filter(Boolean))].sort((a,b)=>a.localeCompare(b));
  async function addTopic(){
