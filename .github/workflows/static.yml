@@ -38,13 +38,23 @@ jobs:
       - name: Build blog editor
         working-directory: blog-app
         run: npm ci --ignore-scripts && npm run build
+      - name: Generate Firebase web configuration
+        env:
+          FIREBASE_WEB_CONFIG: ${{ secrets.FIREBASE_WEB_CONFIG }}
+          FIREBASE_OWNER_UID: ${{ secrets.FIREBASE_OWNER_UID }}
+        run: node scripts/generate-blog-config.cjs
+      - name: Prepare public site
+        run: |
+          mkdir -p _site
+          cp index.html blog-config.js _site/
+          cp -R assets blog _site/
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository
-          path: '.'
+          # Upload only public site assets, excluding source and dependencies
+          path: '_site'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

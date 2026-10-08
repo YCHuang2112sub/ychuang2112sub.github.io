@@ -9,23 +9,22 @@ The `/blog/` application uses BlockNote, React, Firebase Authentication, and Fir
 3. Create a Firestore database using locked/production rules.
 4. Find your user UID under Authentication → Users. If needed, sign in with Google in another app connected to this project first, or temporarily set `ownerUid` to `SETUP` in the configuration to enable this app's sign-in. Sign in, then retrieve your UID from the Firebase console. Do not use an email address as the UID.
 5. Replace `REPLACE_WITH_YOUR_FIREBASE_UID` in `firestore.rules` with that exact UID. Deploy the rules in the Firestore console. Merge these rules carefully if this Firebase project already stores other applications' data; replacing all rules can affect those applications.
-6. Edit the root `blog-config.js`:
+6. Open repository **Settings → Secrets and variables → Actions → New repository secret**.
 
-```js
-window.BLOG_CONFIG = {
-  firebase: {
-    apiKey: 'YOUR_WEB_API_KEY',
-    authDomain: 'YOUR_PROJECT.firebaseapp.com',
-    projectId: 'YOUR_PROJECT',
-    appId: 'YOUR_WEB_APP_ID'
-  },
-  ownerUid: 'YOUR_FIREBASE_UID'
-};
+Add two secrets:
+
+- `FIREBASE_WEB_CONFIG`: your Firebase Web app configuration as valid JSON (quoted keys; no JavaScript declarations).
+- `FIREBASE_OWNER_UID`: your Firebase Authentication user UID, matching the UID in your deployed Firestore rules.
+
+Example `FIREBASE_WEB_CONFIG`:
+
+```json
+{"apiKey":"YOUR_WEB_API_KEY","authDomain":"YOUR_PROJECT.firebaseapp.com","projectId":"YOUR_PROJECT","appId":"YOUR_WEB_APP_ID"}
 ```
 
-Firebase web configuration is public. Never commit service-account keys or private credentials. Rules enforce authorization regardless of whether visitors alter the UI.
+7. Open **Actions → Deploy static content to Pages → Run workflow**. Adding secrets does not trigger deployment. The workflow generates `blog-config.js` for deployment; real values are never committed. Missing secrets keep setup mode; partial or invalid configuration fails deployment.
 
-7. Commit the configuration. GitHub Pages builds the editor automatically. Open `/blog/`, sign in, create a page, enter its title/topic/date, and save a draft or publish.
+Firebase web configuration remains public in the deployed browser app. Firestore rules enforce owner-only writes and private drafts. Never provide service-account JSON, private keys, or Admin SDK credentials; the generator rejects non-web fields.
 
 Until configuration is available, the existing blog remains readable and `/blog/` shows a setup message. After configuration, the Blog tab displays the new application. Previous static articles remain in `assets/js/blog-data.js`; they are not automatically migrated into Firestore.
 
