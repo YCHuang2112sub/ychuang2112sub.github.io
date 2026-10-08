@@ -1,43 +1,31 @@
-# Blog editor setup
+# Owner authorization through Firestore
 
-The `/blog/` application uses BlockNote, React, Firebase Authentication, and Firestore. It provides owner-only new pages, rich-text editing, topic creation via the topic field, dates, drafts, publishing/unpublishing, and deletion. Articles sort newest first within each topic. Visitors see only published documents. Saving is explicit; navigating away from unsaved edits prompts you first.
+The website no longer receives an owner UID. After Google sign-in it requests `blogAccess/owner` directly from the Firestore server. The server allows that read only for the owner; successful authorization enables the editor. No document needs to exist at that path. Permission denial keeps the user in read-only mode. Post writes remain independently protected by Firestore rules.
 
-## Connect Firebase
+## Required Firebase rule update
 
-1. Create or select a Firebase project and register a Web app.
-2. Enable Authentication → Google sign-in. Add `ychuang2112sub.github.io` to authorized domains.
-3. Create a Firestore database using locked/production rules.
-4. Find your user UID under Authentication → Users. If needed, sign in with Google in another app connected to this project first, or temporarily set `ownerUid` to `SETUP` in the configuration to enable this app's sign-in. Sign in, then retrieve your UID from the Firebase console. Do not use an email address as the UID.
-5. Replace `REPLACE_WITH_YOUR_FIREBASE_UID` in `firestore.rules` with that exact UID. Deploy the rules in the Firestore console. Merge these rules carefully if this Firebase project already stores other applications' data; replacing all rules can affect those applications.
-6. Open repository **Settings → Secrets and variables → Actions → New repository secret**.
+Copy `firestore.rules` into Firebase Console → Firestore Database → Rules. Replace `REPLACE_WITH_YOUR_FIREBASE_UID` with your actual owner UID in the Firebase console, and Publish. Keep that value in Firebase rules only. Preserve other applications' rules if sharing a project.
 
-Add two secrets:
+The new `blogAccess/owner` rule must be deployed before owner editing works. Do not create a publicly readable roles document.
 
-- `FIREBASE_WEB_CONFIG`: your Firebase Web app configuration as valid JSON (quoted keys; no JavaScript declarations).
-- `FIREBASE_OWNER_UID`: your Firebase Authentication user UID, matching the UID in your deployed Firestore rules.
+## GitHub configuration
 
-Example `FIREBASE_WEB_CONFIG`:
+Only `FIREBASE_WEB_CONFIG` is needed by the deployment generator. Store the Firebase web configuration as valid JSON in that repository secret. The existing `FIREBASE_OWNER_UID` secret can be deleted; it is no longer used by the application. Run Deploy static content to Pages after changing secrets.
+
+Example web configuration:
 
 ```json
 {"apiKey":"YOUR_WEB_API_KEY","authDomain":"YOUR_PROJECT.firebaseapp.com","projectId":"YOUR_PROJECT","appId":"YOUR_WEB_APP_ID"}
 ```
 
-7. Open **Actions → Deploy static content to Pages → Run workflow**. Adding secrets does not trigger deployment. The workflow generates `blog-config.js` for deployment; real values are never committed. Missing secrets keep setup mode; partial or invalid configuration fails deployment.
+For a new Firebase project: register a Web app, enable Google Authentication, authorize `ychuang2112sub.github.io`, and create a production-mode Firestore database. Deploy the web configuration, sign in once, retrieve your UID under Authentication → Users, and publish the owner rules with that UID.
 
-Firebase web configuration remains public in the deployed browser app. Firestore rules enforce owner-only writes and private drafts. Never provide service-account JSON, private keys, or Admin SDK credentials; the generator rejects non-web fields.
+## Writing
 
-Until configuration is available, the existing blog remains readable and `/blog/` shows a setup message. After configuration, the Blog tab displays the new application. Previous static articles remain in `assets/js/blog-data.js`; they are not automatically migrated into Firestore.
+Open /blog/ and sign in. Create a new page, enter its title, topic, and date, then write in BlockNote. Save draft, Publish, or Delete are available only after the server confirms owner access. Public visitors see published posts sorted newest first. Unsaved edits prompt before switching pages. Saving is explicit; autosave and revision history are not implemented.
 
-## Local development
+Firebase web configuration remains public at runtime. Private credentials are never needed by the browser. Existing static content in assets/js/blog-data.js is not automatically migrated.
 
-```sh
-cd blog-app
-npm install
-npm run dev
-```
+## Development
 
-For development, copy the root `blog-config.js` to `blog-app/public/blog-config.js`, and authorize localhost in Firebase Authentication. Do not commit local private credentials. `npm run build` writes the static app to `/blog` for deployment.
-
-## Scope
-
-Text, headings, lists, links, and standard BlockNote formatting are supported. Media storage/upload integration is not configured. There is no autosave or revision history yet. Drafts are stored in private Firestore documents; publishing changes their read permission. A signed-in non-owner has read-only access.
+Run npm ci and npm run dev inside blog-app. For local development put the public web configuration in blog-app/public/blog-config.js and authorize localhost in Firebase Authentication. Production builds are generated by GitHub Actions.

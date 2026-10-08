@@ -41,7 +41,6 @@ jobs:
       - name: Generate Firebase web configuration
         env:
           FIREBASE_WEB_CONFIG: ${{ secrets.FIREBASE_WEB_CONFIG }}
-          FIREBASE_OWNER_UID: ${{ secrets.FIREBASE_OWNER_UID }}
         run: node scripts/generate-blog-config.cjs
       - name: Prepare public site
         run: |

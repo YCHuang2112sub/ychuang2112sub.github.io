@@ -2,6 +2,11 @@ rules_version = '2';
 service cloud.firestore {
  match /databases/{database}/documents {
   function owner() { return request.auth != null && request.auth.uid == 'REPLACE_WITH_YOUR_FIREBASE_UID'; }
+  // A successful server read confirms owner access; no document needs to exist.
+  match /blogAccess/owner {
+   allow get: if owner();
+   allow list, write: if false;
+  }
   match /blogPosts/{postId} {
    allow read: if owner() || resource.data.published == true;
    allow create, update: if owner()
