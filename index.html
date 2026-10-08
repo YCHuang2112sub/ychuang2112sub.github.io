@@ -29,6 +29,19 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>[data-project-modal-text] { white-space: pre-line; }</style>
+<style>
+    .blog-layout { display: grid; grid-template-columns: 210px minmax(0, 1fr); gap: 28px; }
+    .blog-topics { border-right: 1px solid #444; padding-right: 18px; }
+    .blog-topics h3 { margin-bottom: 16px; }
+    .blog-topic-button { width: 100%; padding: 12px; margin-bottom: 6px; text-align: left; color: #d6d6d6; border-radius: 10px; }
+    .blog-topic-button:hover, .blog-topic-button.active { color: #ffdb70; background: #2b2b2c; }
+    .blog-topic-button:focus-visible { outline: 2px solid #ffdb70; }
+    .blog-post { margin-bottom: 32px; }
+    .blog-post h4 { margin: 18px 0 12px; }
+    .blog-post p, .blog-empty { color: #d6d6d6; font-size: 15px; line-height: 1.8; margin-bottom: 16px; white-space: pre-line; overflow-wrap: anywhere; }
+    .blog-post time { color: #aaa; font-size: 12px; }
+    @media (max-width: 700px) { .blog-layout { grid-template-columns: 1fr; } .blog-topics { border-right: 0; border-bottom: 1px solid #444; padding: 0 0 12px; } [data-blog-topics] { display: flex; flex-wrap: wrap; gap: 6px; } .blog-topic-button { width: auto; margin: 0; } }
+  </style>
 </head>
 
 <body>
@@ -162,6 +175,7 @@
           <li class="navbar-item">
             <button class="navbar-link" data-nav-link>Resume</button>
           </li>
+          <li class="navbar-item"><button class="navbar-link" data-nav-link>Blog</button></li>
 
           <li class="navbar-item">
             <button class="navbar-link" data-nav-link>Portfolio</button>
@@ -473,6 +487,17 @@
       <!--
         - #PORTFOLIO
       -->
+
+      <article class="blog" data-page="blog">
+        <header><h2 class="h2 article-title">Blog</h2></header>
+        <div class="blog-layout">
+          <aside class="blog-topics" aria-label="Blog topics">
+            <h3 class="h3">Topics</h3>
+            <nav data-blog-topics aria-label="Choose a topic"></nav>
+          </aside>
+          <section class="blog-reading" aria-live="polite" data-blog-reading></section>
+        </div>
+      </article>
 
       <article class="portfolio" data-page="portfolio">
 
@@ -854,6 +879,8 @@
     - custom js link
   -->
   <script src="./assets/js/script.js"></script>
+  <script src="./assets/js/blog-data.js"></script>
+  <script src="./assets/js/blog.js"></script>
 
   <!--
     - ionicon link
@@ -864,4 +891,5 @@
 </body>
 
 </html>
+
 
