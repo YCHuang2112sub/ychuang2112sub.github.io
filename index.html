@@ -9,7 +9,8 @@
   <!-- IMPORTANT: base path for GitHub Pages -->
   <base href="/">
 
-  <title>vCard - Personal Portfolio</title>
+  <title>Yu-Cheng Huang | Software &amp; AI Engineer</title>
+  <meta name="description" content="Yu-Cheng Huang builds AI applications, evaluation workflows, and engineering tools. Explore projects in multimodal generation, model controllability, and database performance.">
 
   <!--
     - favicon
@@ -129,27 +130,7 @@
 
         <div class="separator"></div>
 
-        <ul class="social-list">
-
-          <li class="social-item">
-            <a href="#" class="social-link">
-              <ion-icon name="logo-facebook"></ion-icon>
-            </a>
-          </li>
-
-          <li class="social-item">
-            <a href="#" class="social-link">
-              <ion-icon name="logo-twitter"></ion-icon>
-            </a>
-          </li>
-
-          <li class="social-item">
-            <a href="#" class="social-link">
-              <ion-icon name="logo-instagram"></ion-icon>
-            </a>
-          </li>
-
-        </ul>
+        <ul class="social-list"><li class="social-item"><a href="https://github.com/YCHuang2112sub" class="social-link" aria-label="GitHub profile"><ion-icon name="logo-github"></ion-icon></a></li></ul>
 
       </div>
 
@@ -214,15 +195,9 @@
         </header>
 
         <section class="about-text">
-          <p>
-            I am a software engineer interested in building artificial intelligence applications, especially systems
-            involving agentic behavior and foundation models. My interests include learning how large-scale data is
-            processed, how models are trained and integrated into applications, and how autonomous systems behave in
-            practice. I enjoy hands-on development, such as implementing data pipelines, experimenting with model
-            training, connecting models to applications, and analyzing system behavior through testing and iteration. I
-            am seeking opportunities to learn from real-world projects, strengthen my theoretical foundations, and
-            contribute to practical, impactful intelligent software systems.
-          </p>
+          <p>I build software that connects AI capabilities with practical user workflows. My work spans full-stack applications, multimodal model fine-tuning, evidence-grounded LLM evaluation, and performance optimization.</p>
+          <p>I enjoy open-ended problems: turning uncertainty into testable hypotheses, building prototypes, and investigating why an approach succeeds or fails. I use experiments to guide meaningful improvements in reliability, controllability, and user experience.</p>
+          <p>My background combines computer science and electrical engineering, with experience developing verification tools at Realtek and researching generative-model bias at Boston University.</p>
         </section>
 
 
@@ -232,7 +207,7 @@
 
         <section class="service">
 
-          <h3 class="h3 service-title">What i'm doing</h3>
+          <h3 class="h3 service-title">What I build</h3>
 
           <ul class="service-list">
 
@@ -246,7 +221,7 @@
                 <h4 class="h4 service-item-title">Web development</h4>
 
                 <p class="service-item-text">
-                  High-quality development of sites at the professional level.
+                  Full-stack AI applications with API integration, persistent user state, authentication, and media-generation workflows.
                 </p>
               </div>
 
@@ -259,10 +234,10 @@
               </div>
 
               <div class="service-content-box">
-                <h4 class="h4 service-item-title">Mobile apps</h4>
+                <h4 class="h4 service-item-title">Engineering &amp; evaluation tools</h4>
 
                 <p class="service-item-text">
-                  Professional development of applications for iOS and Android.
+                  Reusable verification tools, scripted regression checks, and structured experiments for model behavior and system performance.
                 </p>
               </div>
 
@@ -368,13 +343,12 @@
 
             <li class="timeline-item">
 
-              <h4 class="h4 timeline-item-title">Engineer, Teal Corp.</h4>
+              <h4 class="h4 timeline-item-title">Engineer, Realtek Semiconductor Corp.</h4>
 
               <span>Feb 2025 — Oct 2025</span>
 
               <p class="timeline-text">
-                Designed and implemented a dual-frequency oscillator model. Developed a capacitor coupling verification
-                tool in Python.
+                Owned development of a Python-based capacitor-coupling verification tool to automate design checks. Coordinated API exposure and extension requirements with the internal design-tools team, documented tool usage, and brought relevant teams together for progress updates and feature discussions. Designed and implemented a dual-frequency oscillator behavioral model for circuit analysis and validation.
               </p>
 
             </li>
@@ -395,23 +369,24 @@
           </div>
 
           <ol class="timeline-list">
+<li class="timeline-item"><h4 class="h4 timeline-item-title">ScriptToVideo: Script-to-Narrated-Video Application</h4><span>Jan 2026 — Jun 2026</span><p class="timeline-text">Built the frontend, backend, and AI API integration from zero to one, delivering an internet-accessible workflow from script parsing to narrated video. Persisted user assets and generation stages in Firebase across browser restarts. Implemented OAuth2 authentication and atomic credit reservations, charging on successful generation and refunding failures. Identified provider API throughput as a constraint on concurrent usage.</p></li>
 
-            <!--
+<li class="timeline-item"><h4 class="h4 timeline-item-title">CMV (Change My View) Essay Tone Categorization</h4><span>May 2025 — Aug 2025</span><p class="timeline-text">Built a staged LangGraph workflow that answers one question at a time, grounds answers in sentence-level evidence, and records supporting rationale. Evaluated 100 generated essays using human review of a subset and weaker-model comparisons against a stronger reference model, reaching 90% agreement with the reference.</p></li>
+
+<li class="timeline-item"><h4 class="h4 timeline-item-title">DebiasPI: Inference-Time Debiasing by Prompt Iteration</h4><span>Apr 2024 — Sep 2024</span><p class="timeline-text">AIEM Group, supervised by Professor Margrit Betke. Developed a prompt-iteration framework to steer demographic distributions in DALL-E 3 outputs. Designed an image-annotation codebook and automated bias-measurement pipeline. Reached assigned race distributions while documenting persistent skin-tone imbalance and limits of prompt-based control.</p></li>
+
+
             <li class="timeline-item">
 
               <h4 class="h4 timeline-item-title">StoryFlow: AI-Powered Visual Novel Editor</h4>
 
-              <span>Jul 2024 — Present</span>
+              <span>May 2026 — Present</span>
 
               <p class="timeline-text">
-                Developed a flow-based Visual Novel editor featuring AI-powered voiceover (TTS), node-based logic
-                (similar to ComfyUI), and a WYSIWYG scene editor.
-                Integrated Gemini API for LLM-driven branching and automated health checks for story staging. Support
-                for desktop (.exe) and mobile (Android/iOS) export.
+                Built a Node.js visual novel editor with graph-based branching narratives, interactive scene previews, character staging, and AI-generated voiceovers. Organized story graphs and asset workflows into modular components for rapid iteration.
               </p>
 
             </li>
-            -->
 
             <li class="timeline-item">
 
@@ -435,9 +410,7 @@
               <span>Feb 2024 — Jun 2024</span>
 
               <p class="timeline-text">
-                Multimodal framework and dataset (8.2k pairs) for text-to-image synthesis, leveraging ControlNet for
-                high-fidelity character-background integration. Built an automated bias-measurement pipeline with CLIP
-                and InceptionV3 evaluations.
+                Proposed the project approach and aligned teammates on experiments and evaluation. Prepared 7.6K training and 0.6K evaluation examples from video frames, character segmentation, background inpainting, and scene descriptions. Fine-tuned ControlNet for text-guided character placement and evaluated similarity, text alignment, and realism; investigated limitations in dataset size and quality.
               </p>
 
             </li>
@@ -459,7 +432,7 @@
 
               <h4 class="h4 timeline-item-title">Sticker Gacha: Digital Stamp Collection System</h4>
 
-              <span>Nov 2022 — Mar 2023</span>
+              <span>Dec 2025 — Jan 2026</span>
 
               <p class="timeline-text">
                 A standalone collection app for Chibi stickers featuring a Gemini AI-powered Gacha system and infinite
@@ -478,8 +451,7 @@
               <p class="timeline-text">
                 Targeted inefficiencies in RocksDB point queries by proposing and prototyping level-wise and SuRF-based
                 range-delete filters, reducing unnecessary disk I/O and accelerating query speed.
-                Diagnosed system bottlenecks with Valgrind and Intel VTune Flame Graphs, then introduced new range
-                tombstone propagation during flush and compaction, improving operational efficiency.
+                Profiled bottlenecks with Valgrind and Intel VTune and implemented range-tombstone propagation during flush and compaction. Achieved up to 40× higher throughput for queries on range-deleted keys while preserving baseline performance for unaffected workloads. Built a verifier class and scripted regression checks to validate behavioral correctness and log errors after implementation changes.
               </p>
 
             </li>
@@ -492,61 +464,7 @@
 
           <h3 class="h3 skills-title">My skills</h3>
 
-          <ul class="skills-list content-card">
-
-            <li class="skills-item">
-
-              <div class="title-wrapper">
-                <h5 class="h5">AI Frameworks (LangChain, Diffusers, RAG)</h5>
-                <data value="90">90%</data>
-              </div>
-
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 90%;"></div>
-              </div>
-
-            </li>
-
-            <li class="skills-item">
-
-              <div class="title-wrapper">
-                <h5 class="h5">ML Frameworks (PyTorch, TensorFlow)</h5>
-                <data value="95">95%</data>
-              </div>
-
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 95%;"></div>
-              </div>
-
-            </li>
-
-            <li class="skills-item">
-
-              <div class="title-wrapper">
-                <h5 class="h5">Python & C++</h5>
-                <data value="95">95%</data>
-              </div>
-
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 95%;"></div>
-              </div>
-
-            </li>
-
-            <li class="skills-item">
-
-              <div class="title-wrapper">
-                <h5 class="h5">Linux & Matlab</h5>
-                <data value="85">85%</data>
-              </div>
-
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 85%;"></div>
-              </div>
-
-            </li>
-
-          </ul>
+          <ul class="skills-list content-card"><li class="skills-item"><h5 class="h5">Programming</h5><p class="timeline-text">Python, C++, Java, JavaScript, Node.js, Bash</p></li><li class="skills-item"><h5 class="h5">AI & ML</h5><p class="timeline-text">LangGraph, LangChain, PyTorch, TensorFlow, ControlNet, LLM API integration</p></li><li class="skills-item"><h5 class="h5">Applications & data</h5><p class="timeline-text">Firebase, MongoDB, OAuth2, JavaFX, REST APIs</p></li><li class="skills-item"><h5 class="h5">Engineering tools</h5><p class="timeline-text">Linux, Git/GitHub, Valgrind, Intel VTune, scripted regression testing, MATLAB/Simulink</p></li></ul>
 
         </section>
 
@@ -616,7 +534,6 @@
 
           <ul class="project-list">
 
-            <!--
             <li class="project-item  active" data-filter-item data-category="ai & applications"
               data-images="./assets/images/project-storyflow.png,./assets/images/storyflow_scene.png,./assets/images/storyflow_voice.png"
               data-desc="Flow-based Visual Novel Editor with AI-powered voice over, node-based logic, and advanced story development staging. Features node-based script control and a WYSIWYG scene editor.">
@@ -636,7 +553,6 @@
 
               </a>
             </li>
-            -->
 
             <li class="project-item  active" data-filter-item data-category="ai & applications"
               data-images="./assets/images/project-promptshub.webp"
@@ -680,7 +596,7 @@
 
             <li class="project-item  active" data-filter-item data-category="ai & applications"
               data-images="./assets/images/image_integration.webp"
-              data-desc="Multimodal framework and dataset (8.2k pairs) for text-to-image synthesis, leveraging ControlNet for high-fidelity character-background integration.">
+              data-desc="Prepared 7.6K training and 0.6K evaluation examples and fine-tuned ControlNet for text-guided character placement. Coordinated team experiments and compared similarity, text alignment, and realism while investigating data-quality limitations.">
               <a href="#">
 
                 <figure class="project-img">
@@ -915,7 +831,7 @@
 
     <section class="project-modal">
 
-      <button class="modal-close-btn" data-project-modal-close-btn>
+      <button class="modal-close-btn" aria-label="Close project details" data-project-modal-close-btn>
         <ion-icon name="close-outline"></ion-icon>
       </button>
 
