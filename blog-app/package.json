@@ -1,0 +1,22 @@
+{
+  "name": "portfolio-blog",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite"
+  },
+  "dependencies": {
+    "@blocknote/core": "0.55.0",
+    "@blocknote/react": "0.55.0",
+    "@blocknote/mantine": "0.55.0",
+    "@mantine/core": "^8.3.0",
+    "@mantine/hooks": "^8.3.0",
+    "firebase": "^12.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "vite": "^7.0.0"
+  }
+}
