@@ -23,8 +23,7 @@ A professional and responsive vCard portfolio website for YuCheng Huang, Softwar
 - **About Me:** Professional overview and background.
 - **Resume:** Education and work experience timeline.
 - **Portfolio:** Filterable project showcase.
-- **Blog:** Personal insights and articles.
-- **Contact:** Integrated contact form and social links.
+- **Contact:** Email and GitHub profile links.
 - **Responsive Design:** Optimized for all devices and screen sizes.
 
 ## Local Development
@@ -33,11 +32,11 @@ Since this is a static website, you can run it locally without any complex setup
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/YCHuang2112sub/MyPersonalSite.git
+   git clone https://github.com/YCHuang2112sub/ychuang2112sub.github.io.git
    ```
 2. Navigate to the project directory:
    ```bash
-   cd MyPersonalSite
+   cd ychuang2112sub.github.io
    ```
 3. Open `index.html` in your preferred web browser.
 
@@ -54,3 +53,4 @@ Distributed under the MIT License. See `LICENSE` for more information.
 ## Contact
 
 YuCheng Huang - [ychuang2@bu.edu](mailto:ychuang2@bu.edu)
+
